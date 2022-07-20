@@ -15,6 +15,9 @@ pygame.font.init()
 s = pygame.display.set_mode((SCREEN_SIZE * PIXEL_SIZE, SCREEN_SIZE * PIXEL_SIZE))
 pygame.display.set_caption('Snake')
 
+with open('Gen#12_Fit-884.0.p', 'rb') as file:
+  GENOME = pickle.load(file)
+  
 # generate 1st population
 genomes = [Genome() for _ in range(N_POPULATION)]
 best_genomes = None
@@ -24,7 +27,7 @@ while True:
   n_gen += 1
 
   for i, genome in enumerate(genomes):
-    snake = Snake(s, genome=genome)
+    snake = Snake(s, genome1=genome,genome2=GENOME)
     fitness, score = snake.run()
 
     genome.fitness = fitness
