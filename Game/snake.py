@@ -1,5 +1,4 @@
 import pygame
-import os
 import random
 import numpy as np
 import pickle
@@ -59,10 +58,10 @@ class Snake():
         movement = DIRECTIONS[direction]
         new_head = old_head + movement
         if (new_head[0] < 0 or
-                    new_head[0] >= SCREEN_SIZE or
-                    new_head[1] < 0 or
-                    new_head[1] >= SCREEN_SIZE
-                ):
+                new_head[0] >= SCREEN_SIZE or
+                new_head[1] < 0 or
+                new_head[1] >= SCREEN_SIZE
+            ):
             print('p1 out of box')
             return False
 
@@ -94,10 +93,10 @@ class Snake():
         movement = DIRECTIONS[direction]
         new_head = old_head + movement
         if (new_head[0] < 0 or
-                    new_head[0] >= SCREEN_SIZE or
-                    new_head[1] < 0 or
-                    new_head[1] >= SCREEN_SIZE
-                ):
+                new_head[0] >= SCREEN_SIZE or
+                new_head[1] < 0 or
+                new_head[1] >= SCREEN_SIZE
+            ):
             print('p2 out of box')
             return False
 
@@ -178,6 +177,7 @@ class Snake():
         prev_key = pygame.K_UP
 
         font = pygame.font.Font('NanumBarunGothic.ttf', 40)
+        time_font = pygame.font.Font('NanumBarunGothic.ttf', 30)
         font.set_bold(True)
         appleimage = pygame.Surface((PIXEL_SIZE, PIXEL_SIZE))
         appleimage.fill((0, 255, 0))
@@ -284,10 +284,7 @@ class Snake():
                 if e.type == pygame.QUIT:
                     pygame.quit()
                 elif e.type == pygame.KEYDOWN:
-                    # QUIT
-                    if e.key == pygame.K_ESCAPE:
-                        pygame.quit()
-                        exit()
+
                     # PAUSE
                     if e.key == pygame.K_SPACE:
                         pause = True
@@ -296,12 +293,16 @@ class Snake():
                                 if ee.type == pygame.QUIT:
                                     pygame.quit()
                                 elif ee.type == pygame.KEYDOWN:
+                                    # QUIT
+                                    if ee.key == pygame.K_ESCAPE:
+                                        pygame.quit()
+                                        exit()
                                     if ee.key == pygame.K_SPACE:
                                         pause = False
                                     if ee.key == pygame.K_c:
                                         self.score1 = 0
                                         self.snake1 = np.array(
-                                        [[15, 26], [15, 27], [15, 28], [15, 29]])
+                                            [[15, 26], [15, 27], [15, 28], [15, 29]])
                                         self.direction1 = 0  # UP
                                         self.fitness1 = 0.
                                         self.last_dist1 = np.inf
@@ -373,6 +374,10 @@ class Snake():
             score_ts2 = font.render(
                 "Human "+str(self.score2), False, (255, 0, 0))
             self.s.blit(score_ts2, (560, 5))
+            # time
+            time = time_font.render(str(round(self.timer, 1)) +
+                               '초', False, (255, 255, 255))
+            self.s.blit(time, (300, 5))
 
             pygame.display.update()
 
