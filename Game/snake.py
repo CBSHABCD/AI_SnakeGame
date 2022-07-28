@@ -3,8 +3,8 @@ import random
 import numpy as np
 import pickle
 
-FPS = 10
-SCREEN_SIZE = 40
+FPS = 5
+SCREEN_SIZE = 30
 PIXEL_SIZE = 20
 LINE_WIDTH = 1
 
@@ -58,10 +58,10 @@ class Snake():
         movement = DIRECTIONS[direction]
         new_head = old_head + movement
         if (new_head[0] < 0 or
-                new_head[0] >= SCREEN_SIZE or
-                new_head[1] < 0 or
-                new_head[1] >= SCREEN_SIZE
-            ):
+                    new_head[0] >= SCREEN_SIZE or
+                    new_head[1] < 0 or
+                    new_head[1] >= SCREEN_SIZE
+                ):
             print('p1 out of box')
             return False
 
@@ -93,10 +93,10 @@ class Snake():
         movement = DIRECTIONS[direction]
         new_head = old_head + movement
         if (new_head[0] < 0 or
-                new_head[0] >= SCREEN_SIZE or
-                new_head[1] < 0 or
-                new_head[1] >= SCREEN_SIZE
-            ):
+                    new_head[0] >= SCREEN_SIZE or
+                    new_head[1] < 0 or
+                    new_head[1] >= SCREEN_SIZE
+                ):
             print('p2 out of box')
             return False
 
@@ -189,7 +189,7 @@ class Snake():
 
         while True:
             self.timer += 0.1
-            if self.timer > 60:
+            if self.timer > 15:
                 msg1 = "AI : Human"
                 msg2 = f"{self.score1} : {self.score2}"
                 msg3 = "AI Win"
@@ -376,7 +376,7 @@ class Snake():
             self.s.blit(score_ts2, (560, 5))
             # time
             time = time_font.render(str(round(self.timer, 1)) +
-                               '초', False, (255, 255, 255))
+                                    '초', False, (255, 255, 255))
             self.s.blit(time, (300, 5))
 
             pygame.display.update()
